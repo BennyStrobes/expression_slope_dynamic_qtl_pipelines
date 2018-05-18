@@ -34,6 +34,9 @@ total_expression_file="/project2/gilad/bstrober/ipsc_differentiation/preprocess/
 # Dosage-based genotypes for all samples
 genotype_file="/project2/gilad/bstrober/ipsc_differentiation/preprocess/genotype/YRI_genotype.vcf"
 
+# Results from standard dynamic qtl analysis (for all variant gene pairs)
+standard_dynamic_qtl_results="/project2/gilad/bstrober/ipsc_differentiation/dynamic_qtl_pipelines/ipsc_data_te/qtl_results/te_log_linear_environmental_variable_time_steps_optimizer_LBFGS_genotype_round_covariate_method_cell_line_pc1Xtime_permutation_scheme_none_permute_False_merged_dynamic_qtl_results.txt"
+
 ###############################################################################
 # Output directories (aasume all of these exist prior to starting analysis)
 ###############################################################################
@@ -111,24 +114,23 @@ fi
 ##### 2. "pc1"
 ##### 3. "pc1_2"
 ##### 4. "pc1_3"
+if false; then
 covariate_method="none"
 parameter_string="expression_slope_dynamic_qtl_environmental_variable_"$environmental_variable_form"_genotype_version_"$genotype_version"_cov_method_"$covariate_method
-sh expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir
+sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir $standard_dynamic_qtl_results
 
-if false; then
 covariate_method="pc1"
 parameter_string="expression_slope_dynamic_qtl_environmental_variable_"$environmental_variable_form"_genotype_version_"$genotype_version"_cov_method_"$covariate_method
-sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir
+sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir $standard_dynamic_qtl_results
 
 covariate_method="pc1_2"
 parameter_string="expression_slope_dynamic_qtl_environmental_variable_"$environmental_variable_form"_genotype_version_"$genotype_version"_cov_method_"$covariate_method
-sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir
+sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir $standard_dynamic_qtl_results
 
 covariate_method="pc1_3"
 parameter_string="expression_slope_dynamic_qtl_environmental_variable_"$environmental_variable_form"_genotype_version_"$genotype_version"_cov_method_"$covariate_method
-sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir
+sbatch expression_slope_dynamic_qtl_shell.sh $input_data_file $covariate_method $parameter_string $qtl_results_dir $qtl_visualization_dir $standard_dynamic_qtl_results
 fi
-
 
 
 
